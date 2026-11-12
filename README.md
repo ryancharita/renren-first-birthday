@@ -1,20 +1,24 @@
-# Renren's First Trip Around the Sun 🚀
+# Renren's 1st Birthday & Dedication 💼
 
-A 3D online invitation for Renren's 1st birthday (November 27, 2026), built with React Three Fiber.
+A "Little Boss" 3D online invitation for Reien Arthur Fiel Taneo (Renren), November 27, 2026, built with React Three Fiber.
 
 **Live:** https://ryancharita.github.io/renren-first-birthday/
 
-Guests tap a starry envelope to open the invitation, which also starts the music. As they scroll, the camera flies past the moon and a rocket to Renren's planet with its golden "1". Cards along the way show the countdown, the story, party details, location and RSVP.
+Guests tap a confidential memo envelope to open the invitation, which also starts the music. As they scroll, the camera glides past a striped tie, a briefcase and Renren's sunglasses to a glossy blue "1" wearing a crown. Memo-style cards along the way show the photos and countdown, the welcome message, meeting details, venue and RSVP.
 
 ## Editing the details
 
-Everything guests read is in **`src/config.ts`**: date and time, venue, Google Maps link, dress code, hosts, RSVP deadline and RSVP link. Edit it, commit, and push to `main`. GitHub Actions redeploys in about a minute.
+Everything guests read is in **`src/config.ts`**: names, occasion, photo, date and time, venue, Google Maps link, dress code, hosts, RSVP deadline and RSVP link. Edit it, commit, and push to `main`. GitHub Actions redeploys in about a minute.
 
 - **Countdown:** `partyStart` is in the guest's local time (`YYYY-MM-DDTHH:MM`).
 - **Maps link:** in Google Maps, tap *Share* on the venue and paste the link into `mapUrl`.
 - **RSVP link:** `https://m.me/<your-facebook-username>` opens Messenger. `sms:+63XXXXXXXXXX` opens a text message instead.
 
 Also update the preview text in `index.html` (`og:` tags) if the date changes. That text is what Messenger and Facebook show when the link is shared.
+
+## Photo
+
+The hero photo is `public/renren.jpg`. Replace it with any wide photo (about 900×400 works well).
 
 ## Music
 
@@ -32,7 +36,7 @@ npm run dev
 | Piece | Where |
 | --- | --- |
 | Envelope / music button | `src/components/Envelope.tsx`, `MusicToggle.tsx` |
-| 3D scene (planet, moon, rocket, stars) | `src/components/Experience.tsx`, `src/components/scene/` |
+| 3D scene (tie, briefcase, sunglasses, "1" with crown, stars) | `src/components/Experience.tsx`, `src/components/scene/BossProps.tsx` |
 | Camera path that follows the scroll | `src/components/scene/CameraRig.tsx` |
 | Text cards | `src/components/sections/` |
 | Countdown and music hooks | `src/hooks/` |

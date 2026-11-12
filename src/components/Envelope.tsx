@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import { config } from '../config'
 
-// Opening screen. The tap that opens it is also what lets the browser start the music.
+// Opening screen: a confidential memo envelope. The tap that opens it is also what lets the browser start the music.
 export function Envelope({ onOpen }: { onOpen: () => void }) {
   const [opening, setOpening] = useState(false)
   const [gone, setGone] = useState(false)
@@ -18,7 +18,8 @@ export function Envelope({ onOpen }: { onOpen: () => void }) {
     <AnimatePresence>
       {!gone && (
         <motion.div className="envelope-screen" exit={{ opacity: 0 }} transition={{ duration: 0.8 }}>
-          <p className="eyebrow">A message from outer space</p>
+          <p className="memo-pill">Memorandum</p>
+          <p className="envelope-screen__from">A message from the Boss</p>
           <motion.button
             className="envelope"
             onClick={open}
@@ -27,6 +28,7 @@ export function Envelope({ onOpen }: { onOpen: () => void }) {
             transition={opening ? { delay: 0.5, duration: 0.6 } : { duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           >
             <span className="envelope__body" />
+            <span className="envelope__stamp">Confidential</span>
             <motion.span
               className="envelope__flap"
               animate={{ rotateX: opening ? 180 : 0 }}

@@ -1,26 +1,26 @@
-import { Stars } from '@react-three/drei'
+import { Sparkles } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
+import { BlueStars, Briefcase, Necktie, NumberOne, Sunglasses } from './scene/BossProps'
 import { CameraRig } from './scene/CameraRig'
-import { Moon } from './scene/Moon'
-import { Planet } from './scene/Planet'
-import { Rocket } from './scene/Rocket'
 
 // The 3D backdrop. It sits fixed behind the page; the camera follows the page's scroll position.
+// The canvas is transparent so the light-blue page gradient shows through.
 export function Experience({ still }: { still: boolean }) {
   return (
     <div className="scene">
-      <Canvas camera={{ position: [0, 1, 42], fov: 50 }} dpr={[1, 2]} eventSource={document.getElementById('root')!}>
-        <color attach="background" args={['#0b1033']} />
-        <fog attach="fog" args={['#0b1033', 30, 90]} />
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[6, 8, 10]} intensity={1.6} color="#fff1dc" />
-        <pointLight position={[-8, -2, 6]} intensity={40} color="#b49bff" />
+      <Canvas camera={{ position: [0, 0.5, 44], fov: 50 }} dpr={[1, 2]} eventSource={document.getElementById('root')!}>
+        <fog attach="fog" args={['#e3eeff', 28, 70]} />
+        <ambientLight intensity={0.9} />
+        <hemisphereLight args={['#ffffff', '#9fc2ff', 0.8]} />
+        <directionalLight position={[5, 8, 12]} intensity={2.2} />
 
         <CameraRig still={still} />
-        <Stars radius={90} depth={60} count={4000} factor={4} saturation={0.4} fade speed={still ? 0 : 0.6} />
-        <Planet still={still} />
-        <Moon still={still} position={[-6, 2, 22]} />
-        <Rocket still={still} position={[-7, -1.5, 15]} />
+        <Necktie still={still} position={[-4, 1.2, 26]} rotation={[0, 0.3, -0.25]} />
+        <Briefcase still={still} position={[5, -1.5, 18]} rotation={[0.1, -0.5, 0.05]} />
+        <Sunglasses still={still} position={[-5, 2, 10]} rotation={[0.1, 0.5, 0.1]} />
+        <NumberOne still={still} position={[0, 0, 0]} rotation={[0, -0.25, 0]} />
+        <BlueStars still={still} />
+        <Sparkles count={80} scale={[18, 10, 40]} position={[0, 0, 18]} size={4} speed={still ? 0 : 0.3} color="#4f8fff" />
       </Canvas>
     </div>
   )

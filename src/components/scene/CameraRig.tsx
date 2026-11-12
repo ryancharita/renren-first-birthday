@@ -2,20 +2,20 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect } from 'react'
 import { CatmullRomCurve3, MathUtils, PerspectiveCamera, Vector3 } from 'three'
 
-// One keyframe per page: deep space → past the moon → by the rocket → arriving at Renren's planet.
+// One keyframe per page: the whole office → the tie → the briefcase → the sunglasses → the big "1".
 const path = new CatmullRomCurve3([
-  new Vector3(0, 1, 42),
-  new Vector3(5, 2.5, 30),
-  new Vector3(-3, -0.5, 21),
-  new Vector3(3.5, 1.5, 13),
-  new Vector3(1, 1.5, 15),
+  new Vector3(0, 0.5, 44),
+  new Vector3(-0.5, 1, 33),
+  new Vector3(1.5, 0, 24.5),
+  new Vector3(-1.5, 1.5, 16),
+  new Vector3(0, 0.8, 9),
 ])
 const look = new CatmullRomCurve3([
   new Vector3(0, 0, 0),
-  new Vector3(-6, 2, 22),
-  new Vector3(-7, -1.5, 15),
-  new Vector3(1, 0.5, 0),
-  new Vector3(1, 0.5, 0),
+  new Vector3(-4, 0, 26),
+  new Vector3(5, -1.5, 18),
+  new Vector3(-5, 2, 10),
+  new Vector3(0, 0.6, 0),
 ])
 
 const pos = new Vector3()
@@ -32,7 +32,7 @@ export function CameraRig({ still }: { still: boolean }) {
   const { camera, size } = useThree()
   const wide = size.width > size.height
 
-  // Phones are narrow, so widen the view to keep the planet and its "1" in frame.
+  // Phones are narrow, so widen the view to keep the props in frame.
   useEffect(() => {
     const cam = camera as PerspectiveCamera
     cam.fov = wide ? 50 : 62
@@ -44,13 +44,11 @@ export function CameraRig({ still }: { still: boolean }) {
     path.getPoint(t, pos)
     look.getPoint(t, target)
 
-    // On the last page, nudge the planet clear of the RSVP card: to the right on desktop, up on phones.
+    // Keep props clear of the text cards: to the right on desktop's last page; on phones,
+    // where cards sit at the bottom, lift everything after the opening page.
     const finale = MathUtils.smoothstep(t, 0.75, 1)
-    if (wide) target.x -= 4 * finale
-    else {
-      target.y -= 2.5 * finale
-      target.x += 1 * finale
-    }
+    if (wide) target.x -= 3 * finale
+    else target.y -= 1.6 * MathUtils.smoothstep(t, 0.05, 0.25) + 0.6 * finale
     if (!still) {
       // Gentle parallax from the mouse / finger
       pos.x += pointer.x * 0.6

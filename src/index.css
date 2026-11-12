@@ -1,14 +1,15 @@
 :root {
-  --night: #0b1033;
-  --ink: #f5f1ff;
-  --muted: #c9c2ea;
-  --gold: #ffd27a;
-  --lilac: #b9a6ff;
-  --pink: #ffc6d9;
-  --card: rgba(16, 22, 66, 0.58);
-  --card-border: rgba(255, 255, 255, 0.14);
+  --blue: #1f6fe5;
+  --blue-deep: #0d3a8c;
+  --blue-soft: #e3eeff;
+  --black: #16181d;
+  --ink: #16213a;
+  --muted: #4a5878;
+  --paper: #ffffff;
+  --stripes: repeating-linear-gradient(-45deg, var(--black) 0 14px, #fff 14px 24px, var(--blue) 24px 38px, #fff 38px 48px);
   --display: 'Fredoka', system-ui, sans-serif;
   --body: 'Nunito', system-ui, sans-serif;
+  --script: 'Pacifico', cursive;
 }
 
 *,
@@ -19,10 +20,19 @@
 
 body {
   margin: 0;
-  background: var(--night);
+  background: var(--blue-soft);
   color: var(--ink);
   font-family: var(--body);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Striped band across the top, like the printed invitation */
+.stripes {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 12px;
+  z-index: 6;
+  background: var(--stripes);
 }
 
 /* ---------- Scroll story ---------- */
@@ -30,6 +40,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 0;
+  background: radial-gradient(ellipse at 50% 40%, #ffffff, #d6e6ff 75%);
 }
 main {
   position: relative;
@@ -42,7 +53,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 16px;
+  padding: 28px 16px 24px;
 }
 .section--left {
   justify-content: flex-start;
@@ -53,125 +64,215 @@ main {
 
 .card {
   pointer-events: auto;
-  width: min(440px, 100%);
-  padding: 28px 26px;
-  border-radius: 24px;
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  width: min(460px, 100%);
+  padding: 26px 24px;
+  border-radius: 22px;
+  background: var(--paper);
+  border: 4px solid var(--blue);
+  box-shadow: 0 0 0 4px var(--black), 0 24px 60px rgba(13, 58, 140, 0.25);
   text-align: center;
-  line-height: 1.6;
+  line-height: 1.55;
 }
 .section--left .card,
 .section--right .card {
   margin-inline: clamp(0px, 6vw, 96px);
 }
+.card p {
+  margin-block: 0 12px;
+}
 
+.memo-pill {
+  display: inline-block;
+  margin: 0 0 14px !important;
+  padding: 4px 22px;
+  border-radius: 14px;
+  background: var(--black);
+  color: #fff;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 0 0 3px var(--blue);
+}
 .eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   font-size: 0.8rem;
+  font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--pink);
+  color: var(--blue);
 }
 .title,
 .heading {
   margin: 0 0 12px;
   font-family: var(--display);
-  font-weight: 600;
-  line-height: 1.1;
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--black);
 }
 .title {
-  font-size: clamp(2.1rem, 8vw, 3.2rem);
+  font-size: clamp(1.9rem, 7.5vw, 2.6rem);
+}
+.title__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 .heading {
-  font-size: clamp(1.7rem, 6vw, 2.3rem);
+  font-size: clamp(1.6rem, 6vw, 2.1rem);
+}
+.script {
+  font-family: var(--script);
+  font-weight: 400;
+  color: var(--blue);
+}
+.title .script {
+  font-size: 1.25em;
+  transform: rotate(-6deg);
+}
+.big-one {
+  font-size: 2em;
+  line-height: 0.9;
+  color: var(--blue);
+  -webkit-text-stroke: 3px var(--blue-deep);
+  text-shadow: 4px 5px 0 var(--blue-deep);
 }
 .subtitle {
-  margin: 0 0 20px;
+  margin: 0 0 16px;
   font-size: 1.15rem;
-  color: var(--muted);
-}
-.gold {
-  color: var(--gold);
+  font-weight: 800;
+  color: var(--blue);
 }
 .hint {
-  margin: 18px 0 0;
+  margin: 14px 0 0 !important;
   font-size: 0.85rem;
   color: var(--muted);
-  opacity: 0.8;
 }
-.card p {
-  margin-block: 0 12px;
+
+.photo {
+  display: block;
+  width: 100%;
+  margin: 4px 0 14px;
+  border-radius: 14px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, #000 82%, transparent);
 }
 
 .countdown {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 }
 .countdown__cell {
   display: grid;
-  min-width: 64px;
-  padding: 10px 6px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.08);
+  min-width: 62px;
+  padding: 8px 6px;
+  border-radius: 12px;
+  background: var(--black);
+  color: #fff;
 }
 .countdown__num {
   font-family: var(--display);
-  font-size: 1.7rem;
-  color: var(--gold);
+  font-size: 1.6rem;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 .countdown__label {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--muted);
+  color: #9fc2ff;
+}
+
+/* Brush-stroke banners */
+.banner {
+  margin: 0 -8px 16px !important;
+  padding: 12px 18px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 5vw, 1.55rem);
+  line-height: 1.2;
+  color: #fff;
+  border-radius: 6px 18px 8px 20px;
+  transform: rotate(-1.5deg);
+}
+.banner--blue {
+  background: linear-gradient(100deg, var(--blue-deep), var(--blue) 40%, #3d8bff);
+  text-shadow: 0 2px 0 var(--blue-deep);
+}
+.banner--black {
+  background: var(--black);
+}
+.lead {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--black);
+}
+.ribbon {
+  position: relative;
+  margin: 8px 0 0 !important;
+  padding: 10px 14px;
+  border: 3px dashed var(--blue);
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 6px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 5.5vw, 1.8rem);
+  line-height: 1.15;
+  color: var(--blue-deep);
 }
 
 .details {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 10px 16px;
-  margin: 8px 0 0;
+  gap: 8px 16px;
+  margin: 10px 0 0;
+  padding-top: 12px;
+  border-top: 2px dashed #b9cff5;
   text-align: left;
 }
 .details dt {
-  color: var(--pink);
+  font-family: var(--display);
   font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
 }
 .details dd {
   margin: 0;
+  font-weight: 700;
 }
 
 .button {
   display: inline-block;
-  margin-top: 8px;
-  padding: 12px 24px;
+  margin-top: 6px;
+  padding: 12px 26px;
   border-radius: 999px;
-  background: var(--lilac);
-  color: var(--night);
-  font-weight: 800;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 900;
   text-decoration: none;
+  box-shadow: 0 4px 0 var(--blue-deep);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(185, 166, 255, 0.45);
+  box-shadow: 0 6px 0 var(--blue-deep), 0 10px 24px rgba(31, 111, 229, 0.35);
 }
-.button--gold {
-  background: var(--gold);
+.script--signoff {
+  margin-top: 20px !important;
+  font-size: 1.5rem;
+  color: var(--blue-deep);
 }
 .signoff {
-  margin-top: 24px !important;
   font-family: var(--display);
+  font-weight: 600;
   color: var(--muted);
 }
 
-/* ---------- Envelope ---------- */
+/* ---------- Opening envelope ---------- */
 .envelope-screen {
   position: fixed;
   inset: 0;
@@ -180,9 +281,17 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 18px;
   padding: 16px;
-  background: radial-gradient(ellipse at center, #241d66, var(--night) 70%);
+  background: radial-gradient(ellipse at center, #ffffff, #cfe0ff 75%);
+}
+.envelope-screen .memo-pill {
+  margin: 0 !important;
+}
+.envelope-screen__from {
+  margin: 0;
+  font-weight: 800;
+  color: var(--blue-deep);
 }
 .envelope {
   position: relative;
@@ -198,45 +307,65 @@ main {
   position: absolute;
   inset: 0;
   border-radius: 12px;
-  background:
-    radial-gradient(circle at 20% 70%, #fff 0 1px, transparent 2px),
-    radial-gradient(circle at 75% 80%, #fff 0 1px, transparent 2px),
-    radial-gradient(circle at 85% 35%, var(--gold) 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 40% 85%, var(--pink) 0 1px, transparent 2px),
-    linear-gradient(160deg, #2a2378, #151a4f);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  background: #fff;
+  border: 4px solid var(--blue);
+  box-shadow: 0 0 0 4px var(--black), 0 30px 60px rgba(13, 58, 140, 0.3);
+  overflow: hidden;
+}
+.envelope__body::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 16px;
+  background: var(--stripes);
+}
+.envelope__stamp {
+  position: absolute;
+  right: 16px;
+  bottom: 28px;
+  padding: 2px 10px;
+  border: 3px solid var(--blue);
+  border-radius: 6px;
+  color: var(--blue);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: rotate(-10deg);
+  opacity: 0.85;
 }
 .envelope__flap {
   position: absolute;
-  inset: 0 0 auto;
-  height: 60%;
-  background: linear-gradient(180deg, #3a3196, #262070);
+  inset: 4px 4px auto;
+  height: 58%;
+  background: linear-gradient(180deg, #3d8bff, var(--blue));
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  border-radius: 12px 12px 0 0;
   transform-origin: top center;
   backface-visibility: hidden;
 }
 .envelope__seal {
   position: absolute;
   left: 50%;
-  top: 60%;
-  width: 56px;
-  height: 56px;
+  top: 58%;
+  width: 58px;
+  height: 58px;
   translate: -50% -50%;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ffe3a3, #e0a43a);
-  color: #6b3f08;
+  background: var(--black);
+  border: 3px solid #fff;
+  color: #fff;
   font-family: var(--display);
-  font-size: 1.6rem;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  font-size: 1.7rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .music-toggle {
   position: fixed;
-  top: 16px;
+  top: 24px;
   right: 16px;
   z-index: 5;
   display: grid;
@@ -244,11 +373,10 @@ main {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid var(--card-border);
-  background: var(--card);
-  color: var(--ink);
+  border: 3px solid var(--blue);
+  background: #fff;
+  color: var(--blue);
   cursor: pointer;
-  backdrop-filter: blur(8px);
 }
 
 @media (max-width: 640px) {
@@ -256,7 +384,7 @@ main {
   .section--right {
     justify-content: center;
     align-items: flex-end;
-    padding-bottom: 48px;
+    padding-bottom: 40px;
   }
   .section--left .card,
   .section--right .card {

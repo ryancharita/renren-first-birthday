@@ -7,14 +7,18 @@ export function Hero() {
 
   return (
     <Section>
-      <p className="eyebrow">You're invited to</p>
+      <p className="memo-pill">Memorandum</p>
       <h1 className="title">
-        {config.childName}'s <span className="gold">First</span> Trip Around the Sun
+        The boss baby is
+        <span className="title__row">
+          <span className="script">turning</span>
+          <span className="big-one">1</span>
+        </span>
       </h1>
-      <p className="subtitle">{config.childName} is turning ONE!</p>
+      <img className="photo" src={config.photo} alt={`${config.nickname} in a cap and sunglasses`} />
 
       {done ? (
-        <p className="subtitle gold">It's party day! 🎉</p>
+        <p className="subtitle">The meeting is in session! 🎉</p>
       ) : (
         <div className="countdown" aria-label="Countdown to the party">
           {[
@@ -30,7 +34,7 @@ export function Hero() {
           ))}
         </div>
       )}
-      <p className="hint">Scroll to blast off ↓</p>
+      <p className="hint">Scroll for the full memo ↓</p>
     </Section>
   )
 }

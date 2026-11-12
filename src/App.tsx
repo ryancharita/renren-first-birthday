@@ -25,6 +25,7 @@ export default function App() {
   return (
     <>
       <Experience still={reducedMotion} />
+      <div className="stripes" aria-hidden="true" />
       <main>
         <Hero />
         <Story />

@@ -4,17 +4,13 @@ import { Section } from './Section'
 export function Rsvp() {
   return (
     <Section side="left">
-      <p className="eyebrow">Will you join the crew?</p>
-      <h2 className="heading">RSVP</h2>
-      <p>Kindly let us know by {config.rsvpDeadline}.</p>
-      <a className="button button--gold" href={config.rsvpUrl} target="_blank" rel="noreferrer">
+      <p className="banner banner--black">attendance is mandatory… because the Boss said so!</p>
+      <p>Kindly confirm by {config.rsvpDeadline}.</p>
+      <a className="button" href={config.rsvpUrl} target="_blank" rel="noreferrer">
         {config.rsvpLabel}
       </a>
-      <p className="signoff">
-        With love,
-        <br />
-        {config.hosts}
-      </p>
+      <p className="script script--signoff">See you in the boardroom.</p>
+      <p className="signoff">— {config.hosts}</p>
     </Section>
   )
 }
